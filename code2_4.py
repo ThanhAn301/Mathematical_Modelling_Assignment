@@ -264,9 +264,9 @@ def euler(CO2Air, CO2Top, h, time):
 
         if idx % 300 == 0:
             row = idx // 300
-            worksheet.write(row, 0, idx)
-            worksheet.write(row, 1, CO2Air_0)
-            worksheet.write(row, 2, CO2Top_0)
+            worksheet.write(row + 1, 0, idx)
+            worksheet.write(row + 1, 1, CO2Air_0)
+            worksheet.write(row + 1, 2, CO2Top_0)
             global TAir, TTop, TOut, vWind
             TAir = float(df.at[row, 'TAir'])
             TTop = float(df.at[row, 'TTop'])
@@ -296,8 +296,8 @@ def rk4(CO2Air, CO2Top, h, time):
 
         if idx % 300 == 0:
             row = idx // 300
-            worksheet.write(row, 4, CO2Air_0)
-            worksheet.write(row, 5, CO2Top_0)
+            worksheet.write(row + 1, 4, CO2Air_0)
+            worksheet.write(row + 1, 5, CO2Top_0)
             global TAir, TTop, TOut, vWind
             TAir = float(df.at[row, 'TAir'])
             TTop = float(df.at[row, 'TTop'])
@@ -332,9 +332,15 @@ def main():
 
 wb = Workbook('Output.xlsx')
 worksheet = wb.add_worksheet()
-worksheet.write(0, 1, 'CO2Air')
-worksheet.write(0, 2, 'CO2Top')
-worksheet.write(0, 4, 'CO2Air')
-worksheet.write(0, 5, 'CO2Top')
+worksheet.write(0, 0, 'time')
+worksheet.write(0, 1, 'CO2Air_E')
+worksheet.write(0, 2, 'CO2Top_E')
+worksheet.write(0, 4, 'CO2Air_RK4')
+worksheet.write(0, 5, 'CO2Top_RK4')
+worksheet.write(1, 0, 0)
+worksheet.write(1, 1, CO2Air_0)
+worksheet.write(1, 2, CO2Top_0)
+worksheet.write(1, 4, CO2Air_0)
+worksheet.write(1, 5, CO2Top_0)
 main()
 wb.close()
